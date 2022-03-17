@@ -1,0 +1,12 @@
+***************************
+***Coursework-To-Do-List***
+***************************
+1. Implement SFML
+	Add sfml files
+	Link them
+	Create Window
+2.Implement ImGui
+	Add Imgui files
+	Link Them
+	Create text box
+3. Create Racing Line
