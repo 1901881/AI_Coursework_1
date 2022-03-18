@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "RaceTrack.h"
+
 sf::RectangleShape racingLineInit(sf::RenderWindow* window, sf::RectangleShape line, float movementSpeed);
 sf::RectangleShape racingLineUpdate(sf::RectangleShape line, sf::RenderWindow* window, float dt, float movementSpeed);
 void racingLineRender(sf::RenderWindow* window, sf::RectangleShape line);
@@ -17,6 +19,9 @@ int main()
 
 	ImGui::SFML::Init(window);
 
+	RaceTrack raceTrack(&window);
+
+	/// /////////////////////
 	bool circleExists = true;
 	float circleRadius = 200.0f;
 	int circleSegments = 100;
@@ -38,42 +43,45 @@ int main()
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			ImGui::SFML::ProcessEvent(event);
+			//ImGui::SFML::ProcessEvent(event);
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();
 			}
-			deltaTime = deltaClock.restart().asSeconds();
-			line = racingLineUpdate(line, &window, deltaTime, movementSpeed);
+			//deltaTime = deltaClock.restart().asSeconds();
+			//line = racingLineUpdate(line, &window, deltaTime, movementSpeed);
 
-			ImGui::SFML::Update(window, deltaClock.restart());
-			ImGui::Begin("Window title");
-			ImGui::Text("Window text!");
-			ImGui::Checkbox("Circle", &circleExists);
-			ImGui::SliderFloat("Radius", &circleRadius, 100.0f, 300.0f);
-			ImGui::SliderInt("Segments", &circleSegments, 3.0f, 150.0f);
-			ImGui::ColorEdit3("Color", circleColor);
-			ImGui::End();
+			//ImGui::SFML::Update(window, deltaClock.restart());
+			//ImGui::Begin("Window title");
+			//ImGui::Text("Window text!");
+			//ImGui::Checkbox("Circle", &circleExists);
+			//ImGui::SliderFloat("Radius", &circleRadius, 100.0f, 300.0f);
+			//ImGui::SliderInt("Segments", &circleSegments, 3.0f, 150.0f);
+			//ImGui::ColorEdit3("Color", circleColor);
+			//ImGui::End();
 
-			shape.setRadius(circleRadius);
-			shape.setPointCount(circleSegments);
-			shape.setFillColor(sf::Color((int)(circleColor[0] * 255), (int)(circleColor[1] * 255), (int)(circleColor[2] * 255)));//Color Circle
+			//shape.setRadius(circleRadius);
+			//shape.setPointCount(circleSegments);
+			//shape.setFillColor(sf::Color((int)(circleColor[0] * 255), (int)(circleColor[1] * 255), (int)(circleColor[2] * 255)));//Color Circle
 
-			window.clear(sf::Color(18, 33, 43)); //Color Background
+			//window.clear(sf::Color(18, 33, 43)); //Color Background
 
-			racingLineRender(&window, line);
-			if (!circleExists)
-			{
-				window.draw(shape);
-			}
-			
-			ImGui::SFML::Render(window);//Make sure ImGui is the last to render
-			window.display();
+			//racingLineRender(&window, line);
+			//if (!circleExists)
+			//{
+			//	window.draw(shape);
+			//}
+			//
+			//ImGui::SFML::Render(window);//Make sure ImGui is the last to render
+			//window.display();
 		}
 
 		//Calculate delta time. How much time has passed
 		//since it was last calculated (in seconds) and restart the clock.
 		deltaTime = deltaClock.restart().asSeconds();
+
+		raceTrack.update(deltaTime);
+		raceTrack.render(deltaTime);
 	}
 
 	ImGui::SFML::Shutdown();
