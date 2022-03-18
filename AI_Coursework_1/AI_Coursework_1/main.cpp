@@ -3,9 +3,18 @@
 
 #include <SFML/Graphics.hpp>
 
+sf::RectangleShape racingLineInit(sf::RenderWindow* window, sf::RectangleShape line, float movementSpeed);
+sf::RectangleShape racingLineUpdate(sf::RectangleShape line, sf::RenderWindow* window, float dt, float movementSpeed);
+void racingLineRender(sf::RenderWindow* window, sf::RectangleShape line);
+
 int main()
 {
+	//For Delta Time
+	sf::Clock deltaClock;
+	float deltaTime;
+
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Window Title");
+
 	ImGui::SFML::Init(window);
 
 	bool circleExists = true;
@@ -17,7 +26,12 @@ int main()
 	shape.setFillColor(sf::Color((int)(circleColor[0] * 255), (int)(circleColor[1] * 255), (int)(circleColor[2] * 255)));//Color Circle
 	shape.setPosition(200, 200); //Center Circle
 
-	sf::Clock deltaClock;
+
+	//Racing Line
+	sf::RectangleShape line;
+	float movementSpeed = 1000.0f;
+	line = racingLineInit(&window, line, movementSpeed);
+	
 
 	while (window.isOpen())
 	{
@@ -29,8 +43,10 @@ int main()
 			{
 				window.close();
 			}
-			ImGui::SFML::Update(window, deltaClock.restart());
+			deltaTime = deltaClock.restart().asSeconds();
+			line = racingLineUpdate(line, &window, deltaTime, movementSpeed);
 
+			ImGui::SFML::Update(window, deltaClock.restart());
 			ImGui::Begin("Window title");
 			ImGui::Text("Window text!");
 			ImGui::Checkbox("Circle", &circleExists);
@@ -44,15 +60,72 @@ int main()
 			shape.setFillColor(sf::Color((int)(circleColor[0] * 255), (int)(circleColor[1] * 255), (int)(circleColor[2] * 255)));//Color Circle
 
 			window.clear(sf::Color(18, 33, 43)); //Color Background
-			if (circleExists)
+
+			racingLineRender(&window, line);
+			if (!circleExists)
 			{
 				window.draw(shape);
 			}
+			
 			ImGui::SFML::Render(window);//Make sure ImGui is the last to render
 			window.display();
 		}
+
+		//Calculate delta time. How much time has passed
+		//since it was last calculated (in seconds) and restart the clock.
+		deltaTime = deltaClock.restart().asSeconds();
 	}
 
 	ImGui::SFML::Shutdown();
 	return 0;
+}
+
+//Need to split this up into seperate functions
+sf::RectangleShape racingLineInit(sf::RenderWindow* window, sf::RectangleShape line, float movementSpeed)
+{
+	//sf::RectangleShape line;
+	//float movementSpeed;
+
+	///Will be parameters later//////////
+	sf::Vector2f size = sf::Vector2f(5.0f, window->getSize().y);
+	sf::Vector2f position = sf::Vector2f(window->getSize().x / 2.0f, 0.0f);
+	//////////////////////////////////////
+
+	line.setSize(size);
+	line.setOrigin(sf::Vector2f(size.x / 2.0f, 0.0f));
+	line.setPosition(position);
+
+	return line;
+}
+
+sf::RectangleShape racingLineUpdate(sf::RectangleShape line, sf::RenderWindow* window, float dt, float movementSpeed)
+{
+	// Move line left
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		// Ensure the line doesn't exceed the left bound
+		if (line.getPosition().x > 10.0f)
+		{
+			// Move the line 1 unit left
+			line.move(sf::Vector2f(-movementSpeed * dt, 0.0f));
+		}
+	}
+
+	// Move line right
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		// Ensure the line doesn't exceed the right bound
+		if (line.getPosition().x < window->getSize().x - line.getSize().x)
+		{
+			// Move the line 1 unit right
+			line.move(sf::Vector2f(movementSpeed * dt, 0.0f));
+		}
+	}
+
+	return line;
+}
+
+void racingLineRender(sf::RenderWindow* window, sf::RectangleShape line)
+{
+	window->draw(line);
 }
