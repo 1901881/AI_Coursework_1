@@ -45,6 +45,9 @@
     <ClCompile Include="RaceTrack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CarFSM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RoadLine.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="RaceTrack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CarFSM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

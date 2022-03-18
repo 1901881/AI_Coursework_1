@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "RoadLine.h"
+#include "CarFSM.h"
 
 #include <chrono>
 #include <fstream>
@@ -36,7 +37,7 @@ private:
 
 	// Simulation elements
 	RoadLine* roadLine;
-	//FiniteCar* finiteCar;
+	CarFSM* carFSM;
 	//FuzzyCar* fuzzyCar;
 
 	// Timing variables

@@ -9,7 +9,7 @@ RaceTrack::RaceTrack(sf::RenderWindow* window)
 	roadLine = new RoadLine(window, sf::Vector2f(5.0f, window->getSize().y), sf::Vector2f(window->getSize().x / 2.0f, 0.0f), 1000.0f);
 
 	//// Set up the finite state machine car
-	//finiteCar = new FiniteCar(hwnd);
+	carFSM = new CarFSM(window);
 
 	//// Set up the fuzzy logic car
 	//fuzzyCar = new FuzzyCar(hwnd);
@@ -28,14 +28,14 @@ void RaceTrack::update(float dt)
 	roadLine->Update(dt);
 
 	//// Give the lines position to the finite state machine car
-	//finiteCar->GetLinePosition(racingLine->GetPosition());
+	carFSM->GetLinePosition(roadLine->GetPosition());
 
 	//// Give the lines position to the fuzzy logic car
 	//fuzzyCar->GetLinePosition(racingLine->GetPosition());
 
 	//the_serial_clock::time_point finiteStart = the_serial_clock::now();
 	//// Update the finite state machine car
-	//finiteCar->Update(dt);
+	carFSM->Update(dt);
 	//the_serial_clock::time_point finiteEnd = the_serial_clock::now();
 
 	//the_serial_clock::time_point fuzzyStart = the_serial_clock::now();
@@ -96,16 +96,18 @@ void RaceTrack::render(float dt)
 {
 	beginDraw();
 
+	gui(dt);
+
 	// Draw the racing line
 	roadLine->Render();
 
 	// Draw the finite state machine car
-	//finiteCar->Render();
+	carFSM->Render();
 
 	// Draw the fuzzy logic car
 	//fuzzyCar->Render();
 
-	gui(dt);
+	
 
 	endDraw();
 }
