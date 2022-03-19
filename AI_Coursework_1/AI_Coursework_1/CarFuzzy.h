@@ -32,7 +32,7 @@ private:
 	sf::Sprite carFuzzySprite;
 	sf::Texture carFuzzyTexture;
 
-	enum CarStates
+	enum class CarStates
 	{
 		FarLeft = 0,
 		Left = 1,
