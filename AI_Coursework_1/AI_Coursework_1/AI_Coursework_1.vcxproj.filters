@@ -48,6 +48,9 @@
     <ClCompile Include="CarFSM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CarFuzzy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RoadLine.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CarFSM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CarFuzzy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,12 +10,12 @@ CarFSM::CarFSM(sf::RenderWindow* hwnd)
 	}
 	carFSMTexture.setSmooth(true);
 	carFSMSprite.setTexture(carFSMTexture);
-	carFSMSprite.setScale(sf::Vector2f(0.25f, 0.25f));
+	carFSMSprite.setScale(sf::Vector2f(0.65f, 0.65f));
 	carFSMSprite.setOrigin(sf::Vector2f(carFSMTexture.getSize().x / 2.0f, carFSMTexture.getSize().y / 2.0f));
 	carFSMSprite.setPosition(window->getSize().x / 2.0f, window->getSize().y / 3.0f);
 
 	//sf::Vector2f size = ;
-	rectCarFSM.setSize(sf::Vector2f(100, 100));
+	rectCarFSM.setSize(sf::Vector2f(300, 300));
 	float rectColor[3] = { (float)204 / 255, (float)77 / 255, (float)5 / 255, };
 	rectCarFSM.setFillColor(sf::Color((int)(rectColor[0] * 255), (int)(rectColor[1] * 255), (int)(rectColor[2] * 255)));//Color Circle
 	rectCarFSM.setPosition(window->getSize().x / 2.0f, window->getSize().y / 3.0f);

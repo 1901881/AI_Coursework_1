@@ -12,7 +12,7 @@ RaceTrack::RaceTrack(sf::RenderWindow* window)
 	carFSM = new CarFSM(window);
 
 	//// Set up the fuzzy logic car
-	//fuzzyCar = new FuzzyCar(hwnd);
+	carFuzzy = new CarFuzzy(window);
 
 	//application_timings_file.open("application_timings.csv");
 }
@@ -40,7 +40,7 @@ void RaceTrack::update(float dt)
 
 	//the_serial_clock::time_point fuzzyStart = the_serial_clock::now();
 	//// Update the fuzzy logic car
-	//fuzzyCar->Update(dt);
+	carFuzzy->Update(dt);
 	//the_serial_clock::time_point fuzzyEnd = the_serial_clock::now();
 
 	//auto finiteTime = duration_cast<nanoseconds>(finiteEnd - finiteStart).count();
@@ -105,7 +105,7 @@ void RaceTrack::render(float dt)
 	carFSM->Render();
 
 	// Draw the fuzzy logic car
-	//fuzzyCar->Render();
+	carFuzzy->Render();
 
 	
 

@@ -8,6 +8,7 @@
 
 #include "RoadLine.h"
 #include "CarFSM.h"
+#include "CarFuzzy.h"
 
 #include <chrono>
 #include <fstream>
@@ -38,6 +39,7 @@ private:
 	// Simulation elements
 	RoadLine* roadLine;
 	CarFSM* carFSM;
+	CarFuzzy* carFuzzy;
 	//FuzzyCar* fuzzyCar;
 
 	// Timing variables
