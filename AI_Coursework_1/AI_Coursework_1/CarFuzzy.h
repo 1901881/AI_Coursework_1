@@ -1,9 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "fl/Headers.h"
 //#include "fl\Headers.h"
 
-//using namespace fl;
+using namespace fl;
 
 class CarFuzzy
 {
@@ -27,11 +28,11 @@ public:
 private:
 	sf::RenderWindow* window;
 
-	//Engine* fuzzyEngine;
-
+	//fl::Engine* fuzzyEngine;
+	//fuzzylite-static-debug.lib
 	sf::Sprite carFuzzySprite;
 	sf::Texture carFuzzyTexture;
-
+//CarFuzzyInferenceSystem.fis = fl::FisImporter().fromFile("FuzzyCarInferenceSystem.fis");
 	enum class CarStates
 	{
 		FarLeft = 0,

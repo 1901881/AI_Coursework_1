@@ -23,7 +23,14 @@ CarFuzzy::CarFuzzy(sf::RenderWindow* hwnd)
 	givenDistance = 0.0f;
 	givenVelocity = 0.0f;
 
-	//fuzzyEngine = FisImporter().fromFile("CarFuzzyInferenceSystem2.fis");
+	//const std::string fileString = "CarFuzzyInferenceSystem.fis";
+	//fuzzyEngine = fl::FisImporter().fromFile("CarFuzzyInferenceSystem.fis");
+	//fuzzyEngine = fl::FisImporter().fromFile("FuzzyCarInferenceSystem.fis");
+	//fuzzyEngine = fl::FisImporter().fromFile("FuzzyCarInferenceSystem2.fis");
+	//fuzzyEngine = fl::FisImporter().fromFile(fileString);
+
+	Engine* fuzzyEngine = new Engine();
+	//engine = FisImporter().fromFile("FuzzyCarInferenceSystem.fis");
 }
 
 CarFuzzy::~CarFuzzy()
@@ -71,11 +78,13 @@ void CarFuzzy::MoveCar(float dt)
 		velocity = 1.0f;
 	}
 
-	///// Engine usage
+	/// Engine usage
 	//fuzzyEngine->setInputValue("Distance", distanceFromLine);
 	//fuzzyEngine->setInputValue("Speed", velocity);
 	//fuzzyEngine->process();
 	//dir = fuzzyEngine->getOutputValue("Direction");
+
+	dir = 2;
 
 	if (distanceFromLine < -0.5f && velocity < -0.5f)
 	{
